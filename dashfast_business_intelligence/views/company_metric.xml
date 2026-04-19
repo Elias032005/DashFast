@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+   
+    <record id="company_metric_view_tree" model="ir.ui.view">
+        <field name="name">company_metric.view.tree</field>
+        <field name="model">df.company_metric</field>
+        <field name="arch" type="xml">
+            <tree string ="Comapny Metric">
+
+                <field name="code"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="value"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="company_metric_view_form" model="ir.ui.view">
+        <field name="name">company_metric.view.form</field>
+        <field name="model">df.company_metric</field>
+        <field name="arch" type="xml">
+            <form string="Company Metric">
+                <sheet>
+
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>  
+                    </group>
+
+                    <group>
+                        <field name="date"/>
+                        <field name="value"/> 
+                        <field name="company_id"/> 
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="company_metric_view_search" model="ir.ui.view">
+        <field name="name">company_metric.view.search</field>
+        <field name="model">df.company_metric</field>
+        <field name="arch" type="xml">
+            <search string="Busca">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="company_id"/>
+                
+            </search>
+        </field>
+    </record>
+
+
+    <record id="company_metric_action" model="ir.actions.act_window">
+        <field name="name">Company Metric</field>
+        <field name="res_model">df.company_metric</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+
+           <menuitem id="menu_df_company_metric"
+              name="Company Metric"
+              parent="menu_dashfast_bi_root"
+              action="company_metric_action"
+              sequence="10"/>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_df_department,access.df.department,model_df_department,,1,1,1,1
+access_df_employee_kpi,access.df.employee.kpi,model_df_employee_kpi,,1,1,1,1
+access_df_company_metric,access.df.company.metric,model_df_company_metric,,1,1,1,1

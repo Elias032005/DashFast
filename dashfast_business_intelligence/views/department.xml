@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<odoo>
+    <!-- Para mostrar varios registros en formato tabla -->
+    <record id ="view_department_tree" model = "ir.ui.view">
+        <field name = "name">df.department.tree</field>
+        <field name = "model">df.department</field>
+        <field name = "arch" type = "xml">
+            <tree string= "Departamentos">
+                <field name ="code"/>
+                <field name ="name"/> 
+                <field name ="date"/> 
+                <field name ="value"/> 
+            </tree>
+        </field> 
+    </record> 
+    
+    <!-- Para ver y editar los datos de un registro -->
+    <record id ="view_department_form" model ="ir.ui.view"> 
+        <field name ="name"> df.department.form</field>
+        <field name ="model">df.department</field>
+        <field name ="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name ="code"/>
+                        <field name ="name"/>
+                    </group>
+                    <group>
+                        <field name ="date"/>
+                        <field name ="value"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Indicamos por qué campos se podrá buscar -->
+    <record id="view_department_search" model="ir.ui.view">
+        <field name="name">df.department.search</field>
+        <field name="model">df.department</field>
+        <field name="arch" type="xml">
+            <search string="Busqueda">
+                
+                <field name ="code"/> 
+                <field name ="name"/> 
+                <field name ="date"/> 
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción que abre el modelo df.department -->
+    <record id="action_df_department" model="ir.actions.act_window">
+        <field name="name">Departamentos</field>
+        <field name="res_model">df.department</field>
+        <field name ="view_mode">tree,form</field>
+
+    </record>
+    <!-- Menú principal -->
+    <menuitem 
+        id = "menu_dashfast_bi_root"
+        name = "DashFast BI"
+        sequence = "10"/>
+    <!-- Submenu -->
+       <menuitem id="menu_df_department"
+              name="Departamentos"
+              parent="menu_dashfast_bi_root"
+              action="action_df_department"
+              sequence="10"/>
+
+</odoo>
