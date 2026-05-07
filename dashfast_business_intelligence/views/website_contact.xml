@@ -1,0 +1,75 @@
+<odoo>
+    <template id="website_contact_form_inherit_dashfast"
+              inherit_id="website.contactus"
+              name="DashFast Contact Form Custom">
+
+        <xpath expr="//form" position="attributes">
+            <attribute name="action">/dashfast/guardar_sql</attribute>
+            <attribute name="method">post</attribute>
+            <attribute name="class">o_dashfast_sql_form</attribute>
+            <attribute name="data-model_name"></attribute>
+            <attribute name="data-success-mode"></attribute>
+            <attribute name="data-success-page"></attribute>
+        </xpath>
+
+        <xpath expr="//div[contains(@class, 's_website_form_submit')]/a" position="replace">
+            <button type="submit" class="btn btn-primary o_dashfast_send">
+                Enviar
+            </button>
+        </xpath>
+
+        <xpath expr="//form" position="inside">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+        </xpath>
+
+        <xpath expr="//input[@name='email_from']/ancestor::div[contains(@class, 's_website_form_field')][1]" position="after">
+
+            <div class="form-group s_website_form_field mb-3 col-12 s_website_form_custom"
+                 data-type="char"
+                 data-name="Tabla">
+                <label class="s_website_form_label form-label" for="tabla">
+                    Tabla *
+                </label>
+                <select id="tabla"
+                        name="tabla"
+                        class="form-select s_website_form_input"
+                        required="required">
+                    <option value="">Selecciona una tabla</option>
+                    <option value="ventas">Ventas</option>
+                    <option value="compras">Compras</option>
+                </select>
+            </div>
+
+            <div class="form-group s_website_form_field mb-3 col-12 s_website_form_custom"
+                 data-type="date"
+                 data-name="Fecha inicio">
+                <label class="s_website_form_label form-label" for="fecha_inicio">
+                    Fecha inicio *
+                </label>
+                <input type="date"
+                       id="fecha_inicio"
+                       name="fecha_inicio"
+                       class="form-control s_website_form_input"
+                       required="required"/>
+            </div>
+
+            <div class="form-group s_website_form_field mb-3 col-12 s_website_form_custom"
+                 data-type="date"
+                 data-name="Fecha fin">
+                <label class="s_website_form_label form-label" for="fecha_fin">
+                    Fecha fin *
+                </label>
+                <input type="date"
+                       id="fecha_fin"
+                       name="fecha_fin"
+                       class="form-control s_website_form_input"
+                       required="required"/>
+            </div>
+
+        </xpath>
+
+        <xpath expr="//input[@name='subject']/ancestor::div[contains(@class, 's_website_form_field')][1]" position="replace">
+        </xpath>
+
+    </template>
+</odoo>
