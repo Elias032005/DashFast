@@ -1,0 +1,66 @@
+services:
+  web:
+    image: odoo:17
+    container_name: DashFast_Odoo
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - HOST=db
+      - USER=dashfast
+      - PASSWORD=DashFast@Password2005
+    networks:
+      - odoo-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    container_name: DashFast_Postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=dashfast
+      - POSTGRES_PASSWORD=DashFast@Password2005
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "55433:5432"
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - odoo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dashfast -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:9.0.0
+    container_name: DashFast_PgAdmin
+    depends_on:
+      - db
+    ports:
+      - "7070:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dashfast@example.com
+      - PGADMIN_DEFAULT_PASSWORD=DashFast@pgadmin2005
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - odoo-network
+    restart: unless-stopped
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  pgadmin-data:
+
+networks:
+  odoo-network:
+    name: DashFast_Network
+    driver: bridge
